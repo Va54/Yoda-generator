@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Yoda</title>
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
+    <link href="styles.css" rel="stylesheet" />
+</head>
+<body>
+<div class="main-content">
+    <h1 class="title">
+        <img class="title-image" src="img/yoda.jpg" alt="Yoda"/>
+    </h1>
+    <p class="description">
+        Yoda`s quotes.
+        <br>
+        Specify the number of paragraphs of text you would like to generate.
+    </p>
+    <form action="/" method="POST">
+        <input type="number" class="paragraph-number" name="numberOfParagraphs">
+        <input  id="generate" type="submit" value="Generate" class="generate-button">
+    </form>
+    <a href="javascript:void(0)" id="copytxt" class='copy-button' data-clipboard-target="#targetText">Copy Text</a>
+    <div class="generated-text" id="targetText">
+        <div class='placeholder-div'></div>
+    </div>
+</div>
+<div id="copyOverlay">
+    <div id="copyText"><p>Copied!</p></div>
+</div>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+<script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+<script>
+    var innerContents = document.getElementsByClassName("generated-text")[0].innerHTML;
+    if (!innerContents.includes("<p>")) {
+        $('.copy-button').hide();
+        document.getElementsByClassName("generated-text")[0].style.display = "none";
+    };
+    var clip = new Clipboard('.copy-button');
+    clip.on('success', function(e) {
+        $('#copyOverlay').show();
+        $('#copyOverlay').fadeOut(2000);
+        e.clearSelection();
+    });
+</script>
+</body>
+</html>
